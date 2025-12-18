@@ -5,7 +5,7 @@ import csv
 import hashlib
 import streamlit as st
 import pandas as pd
-import auth
+from importlib import import_module
 
 PAGE_TITLE = "Student Record Browser"
 
@@ -439,6 +439,12 @@ def load_students_from_text(text: str):
 
 def main():
     st.set_page_config(page_title=PAGE_TITLE, layout="wide")
+    try:
+        auth = import_module("auth")
+    except Exception as e:
+        st.error("Failed to load authentication module. Ensure dependencies are installed on Streamlit Cloud (see requirements.txt).")
+        st.exception(e)
+        st.stop()
     
     # Handle OAuth callback
     if not auth.is_authenticated():
