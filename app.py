@@ -41,10 +41,10 @@ def _parse_from_iter(lines_iter):
             return False
         if len(fields) >= 2 and "(CONTINUED" in fields[1]:
             return False
-        if not re.match(r"^[A-Z0-9]{6,}$", fields[2]):
+        # fields[2] should be all digits (student number)
+        if not fields[2].isdigit():
             return False
-        if not fields[3].isdigit():
-            return False
+        # fields[0] should not be a year (e.g., 2021)
         if fields[0].isdigit() and len(fields[0]) == 4:
             return False
         return True
