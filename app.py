@@ -943,6 +943,4 @@ def main():
                 else:
                     st.success("All mapped programme requirements are completed.")
 
-
-if __name__ == "__main__":
-    main()
+main()
