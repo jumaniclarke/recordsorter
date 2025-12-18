@@ -1,22 +1,19 @@
-import streamlit as st
-from google_auth_oauthlib.flow import Flow
-from google.oauth2 import id_token
-from google.auth.transport import requests
 import os
-import json
+import streamlit as st
+from authlib.integrations.requests_client import OAuth2Session
 
-SCOPES = ['openid', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
+SCOPES = ['openid', 'email', 'profile']
 
 def get_google_oauth_config():
     """Get Google OAuth configuration from secrets or environment."""
     try:
-        client_id = st.secrets["google_oauth"]["client_id"]
-        client_secret = st.secrets["google_oauth"]["client_secret"]
-        authorized_users = st.secrets["google_oauth"].get("authorized_users", [])
-    except (KeyError, FileNotFoundError):
+        cfg = st.secrets.get("google_oauth", {})
+        client_id = cfg["client_id"]
+        client_secret = cfg["client_secret"]
+        authorized_users = cfg.get("authorized_users", [])
+    except Exception:
         st.error("Google OAuth credentials not configured. Please set up .streamlit/secrets.toml")
         st.stop()
-    
     return client_id, client_secret, authorized_users
 
 def get_redirect_uri():
@@ -43,27 +40,21 @@ def get_redirect_uri():
     # Default
     return "http://localhost:8501"
 
-def create_flow():
-    """Create OAuth flow."""
+def create_oauth_session():
+    """Create Authlib OAuth2 session for Google."""
     client_id, client_secret, _ = get_google_oauth_config()
     redirect_uri = get_redirect_uri()
-    
-    client_config = {
-        "web": {
-            "client_id": client_id,
-            "client_secret": client_secret,
-            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-            "token_uri": "https://oauth2.googleapis.com/token",
-            "redirect_uris": [redirect_uri],
-        }
-    }
-    
-    flow = Flow.from_client_config(
-        client_config,
-        scopes=SCOPES,
-        redirect_uri=redirect_uri
+    client = OAuth2Session(
+        client_id=client_id,
+        client_secret=client_secret,
+        scope=" ".join(SCOPES),
+        redirect_uri=redirect_uri,
     )
-    return flow
+    # Google OpenID Connect endpoints
+    auth_endpoint = "https://accounts.google.com/o/oauth2/v2/auth"
+    token_endpoint = "https://oauth2.googleapis.com/token"
+    userinfo_endpoint = "https://openidconnect.googleapis.com/v1/userinfo"
+    return client, auth_endpoint, token_endpoint, userinfo_endpoint
 
 def is_user_authorized(email):
     """Check if user email is authorized."""
@@ -97,13 +88,16 @@ def show_login_page():
         st.markdown("<br>", unsafe_allow_html=True)
         
         if st.button("🔑 Sign in with Google", use_container_width=True, type="primary"):
-            flow = create_flow()
-            authorization_url, state = flow.authorization_url(
+            client, auth_endpoint, _, _ = create_oauth_session()
+            authorization_url, state = client.create_authorization_url(
+                auth_endpoint,
+                code_challenge_method="S256",
+                prompt='select_account',
                 access_type='offline',
                 include_granted_scopes='true',
-                prompt='select_account'
             )
             st.session_state.oauth_state = state
+            st.session_state.oauth_code_verifier = getattr(client, "code_verifier", None)
             st.markdown(f'<meta http-equiv="refresh" content="0;url={authorization_url}">', unsafe_allow_html=True)
             st.markdown(f"[Click here if not redirected automatically]({authorization_url})")
 
@@ -132,22 +126,19 @@ def handle_oauth_callback():
             return False
         
         try:
-            flow = create_flow()
-            flow.fetch_token(code=code)
-            
-            credentials = flow.credentials
-            request = requests.Request()
-            
-            # Verify the token and get user info
-            id_info = id_token.verify_oauth2_token(
-                credentials.id_token,
-                request,
-                get_google_oauth_config()[0]
+            client, _, token_endpoint, userinfo_endpoint = create_oauth_session()
+            token = client.fetch_token(
+                token_endpoint,
+                code=code,
+                code_verifier=st.session_state.get("oauth_code_verifier"),
             )
-            
-            email = id_info.get('email')
-            name = id_info.get('name')
-            picture = id_info.get('picture')
+
+            # Fetch user info via OIDC userinfo endpoint
+            resp = client.get(userinfo_endpoint)
+            data = resp.json() if resp and resp.content else {}
+            email = data.get('email')
+            name = data.get('name') or data.get('given_name')
+            picture = data.get('picture')
             
             # Check if user is authorized
             if not is_user_authorized(email):

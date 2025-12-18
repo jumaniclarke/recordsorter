@@ -445,15 +445,18 @@ def main():
         st.error("Failed to load authentication module. Ensure dependencies are installed on Streamlit Cloud (see requirements.txt).")
         st.exception(e)
         st.stop()
-    
-    # Handle OAuth callback
-    if not auth.is_authenticated():
-        auth.handle_oauth_callback()
-    
+
     # Show login page if not authenticated
-    if not auth.is_authenticated():
-        auth.show_login_page()
-        return
+    
+    #if not auth.is_authenticated():
+    #    with st.sidebar:
+    #        st.title("Log in with Google to continue")
+    #        if st.button("Authentication"):
+    #            st.login("google")
+    #            st.write(st.user)
+    #            #st.rerun()
+    #st.success("✅ You are logged in.")
+
     
     # Main app (only shown when authenticated)
     st.title(PAGE_TITLE)
@@ -594,9 +597,7 @@ def main():
                 data_bytes = _annotate_csv_text(st.session_state.original_csv_text, st.session_state.annotations)
                 st.download_button("Download annotated CSV", data=data_bytes, file_name=file_name, mime="text/csv")
 
-        # User info + logout anchored at bottom of sidebar
-        st.markdown("---")
-        auth.show_user_info_sidebar()
+        # Removed user info + logout from sidebar
             
     if not students:
         st.info("Upload a report CSV to begin browsing records.")
