@@ -1,0 +1,72 @@
+programme_code,programme_name,year,year_raw,codes,line
+CB003BUS09,,4,Fourth Year,"STA1006S,MAM1006H",STA1006S and register for it concurrently with MAM1006H.
+CB003BUS09,,4,Fourth Year,"MAM2010F,MAM2011F",*** MAM2010F and MAM2011F are compulsory courses. Students must choose 2 courses from
+CB004STA13,,4,Fourth Year,"STA1006S,MAM1006H",STA1006S and register for it concurrently with MAM1006H.
+CB004STA13,,4,Fourth Year,"MAM2010F,MAM2011F",*** MAM2010F and MAM2011F are compulsory courses. Students must choose 2 courses from
+CB004INF01,,4,Fourth Year,"CSC1015F,CSC1016S,INF1003F",Students who complete CSC1015F can complete CSC1016S in first year in substitution for INF1003F
+CB004INF01,,4,Fourth Year,"INF4024W,INF4027W",Students shall not repeat the following courses: INF4024W and INF4027W.
+CB004ECO01,,4,Fourth Year,"MAM2000W,MAM2000W",must obtain permission from the convener of MAM2000W. See the MAM2000W handbook entry
+CB004ECO01,,4,Fourth Year,"STA3022,STA3000","**Students who take STA3022 cannot take STA3000 level courses and must, therefore, take"
+CB004ECO01,,4,Fourth Year,"ECO3020F,ECO3021S","As a rule, a 65% average for 3rd year Economics courses and at least 60% for ECO3020F, ECO3021S"
+CB025BUS09,,4,Fourth Year,"STA1006S,MAM1006H",STA1006S and register for it concurrently with MAM1006H.
+CB025BUS09,,4,Fourth Year,"MAM2010F,MAM2011F",*** MAM2010F and MAM2011F are compulsory courses. Students must choose 2 courses from
+CB024STA13,,4,Fourth Year,"MAM2010F,MAM2011F",*** MAM2010F and MAM2011F are compulsory courses. Students may choose 2 courses from
+CB024STA13,,4,Fourth Year,"STA1106H,MAM1006H",STA1106H and register for it concurrently with MAM1006H.
+CB024FTX05,,4,Fourth Year,"ACC1006F,ACC1020H",*ACC1006F (Financial Accounting) will be accepted as an equivalent credit for ACC1020H for this
+CB024INF01,,4,Fourth Year,"CSC1015F,CSC1016S,INF1003F",Students who complete CSC1015F can complete CSC1016S in first year in substitution for INF1003F
+CB024ECO01,,4,Fourth Year,"MAM2010F,MAM2011F,MAM2012S,MAM2013S,MAM2014S","* Students wishing to register for MAM2010F, MAM2011F, MAM2012S, MAM2013S, MAM2014S"
+CB024ECO01,,4,Fourth Year,"STA3022,STA3000","** Students who take STA3022 cannot take STA3000 level courses and must, therefore, take"
+CB024ECO01,,4,Fourth Year,"ECO3020F,ECO3021S","As a rule, a 65% average for 3rd year Economics courses and at least 60% for ECO3020F, ECO3021S"
+CB018BUS09,,5,Fifth Year,"STA1006S,MAM1006H",STA1006S and register for it concurrently with MAM1006H.
+CB015STA13,,5,Fifth Year,"MAM2010F,MAM2011F",**MAM2010F and MAM2011F are compulsory courses. Students may choose 2 courses from
+CB015STA13,,5,Fifth Year,"STA1106H,MAM1006H",STA1106H and register for it concurrently with MAM1006H.
+CB015INF01,,5,Fifth Year,"CSC1015F,CSC1016S",* Students who complete CSC1015F can complete CSC1016S in first year in substitution for
+CB015ECO01,,5,Fifth Year,"MAM2010F,MAM2011F,MAM2012S,MAM2013S,MAM2014S","* Students wishing to register for MAM2010F, MAM2011F, MAM2012S, MAM2013S, MAM2014S"
+CB015ECO01,,5,Fifth Year,"STA3022,STA3000","** Students who take STA3022 cannot take STA3000 level courses and must, therefore, take"
+CB015ECO01,,5,Fifth Year,"ECO3020F,ECO3021S","As a rule, a 65% average for 3rd year Economics courses and at least 60% for ECO3020F, ECO3021S"
+CB019BUS01,,3,Third Year,"MAM2010F,MAM2011F",*NB. MAM2010F and MAM2011F are compulsory courses. Students may choose 2 courses from
+CB019BUS09,,3,Third Year,"MAM2010F,MAM2011F",*NB. MAM2010F and MAM2011F are compulsory courses. Students may choose 2 courses from
+CB001INF01,,3,Third Year,"CSC1015F,CSC1016S",open are requested to register for CB001INF06 and complete CSC1015F and CSC1016S in first year.
+CB001INF01,,3,Third Year,"CSC1015F,CSC1016S",**Students who complete CSC1015F can complete CSC1016S in first year in substitution for
+CB001INF06,,3,Third Year,"STA1000S,STA1000P",Students who fail STA1000S are recommended to register for STA1000P (subject to approval by the
+CB001INF11,,1,First Year,"CSC1015F,CSC1016S",*Students who complete CSC1015F can complete CSC1016S in first year in substitution for
+CB001INF11,,1,First Year,"CSC1015F,CSC1016S",**Students who complete CSC1015F can complete CSC1016S in first year in substitution for
+CB001INF11,,1,First Year,"STA1000S,STA1000P",***Students who fail STA1000S are recommended to register for STA1000P (subject to approval by
+CB001ECO02,,3,Third Year,"MAM2000W,MAM2000W",must obtain permission from the convener of MAM2000W. See the MAM2000W handbook entry for
+CB001BUS06,,3,Third Year,"BUS2033S,INF1003F,INF2008F,INF2009F,INF2010S,INF2011S","BUS2033S, INF1003F INF2008F, INF2009F, INF2010S and INF2011S plus"
+CB001BUS06,,3,Third Year,"PSY1004F,PSY1005S,BUS1007S,BUS2024F,BUS2023S,BUS3003F,BUS3004S","PSY1004F, PSY1005S, BUS1007S, BUS2024F, BUS2023S, BUS3003F, BUS3004S"
+CB001BUS06,,3,Third Year,"MAM1012S,STA2020F,STA2030S,STA3030F,STA3036S,STA3022F","MAM1012S, STA2020F and STA2030S, STA3030F, STA3036S (STA3022F optional)"
+CB001BUS06,,3,Third Year,"BUS2023S,BUS3039",level. Students may not register for both BUS2023S and BUS3039 within the degree
+CB001BUS06,,3,Third Year,"BUS2023S,BUS3039",BUS2023S Organisational Behaviour (may not be taken with BUS3039)
+CB001BUS06,,3,Third Year,"PVL1008H,PVL1008S",PVL1008H Law of Persons and Family (formerly PVL1008S)
+CB026BUS01,,2,Second Year,"MAM2010F,MAM2011F",*MAM2010F and MAM2011F are compulsory courses. Students may choose 2 courses from
+CB026BUS09,,2,Second Year,"MAM2010F,MAM2011F",*MAM2010F and MAM2011F are compulsory courses. Students may choose 2 courses from
+CB023ECO02,,2,Second Year,"MAM2000W,MAM2000W",must obtain permission from the convener of MAM2000W. See the MAM2000W handbook entry
+CB023INF01,,3,Third Year,"CSC1015F,CSC1016S",open are requested to register for CB001INF06 and complete CSC1015F and CSC1016S in first year
+CB023INF01,,3,Third Year,"CSC1015F,CSC1016S",** Students who complete CSC1015F can complete CSC1016S in the first year in substitution for
+CB023INF11,,3,Third Year,"CSC1015F,CSC1016S",*Students who complete CSC1015F can complete CSC1016S in first year in substitution for
+CB023INF11,,3,Third Year,"CSC1015F,CSC1016S",**Students who complete CSC1015F can complete CSC1016S in first year in substitution for
+CB023INF11,,3,Third Year,"STA1000S,STA1000P",***Students who fail STA1000S are recommended to register for STA1000P (subject to approval by
+CB023BUS06,,3,Third Year,"BUS2033S,INF1003F,INF2008F,INF2009F,INF2010S,INF2011S,INF3003W,INF3014F","BUS2033S, INF1003F INF2008F, INF2009F, INF2010S and INF2011S plus INF3003W, INF3014F"
+CB023BUS06,,3,Third Year,"PSY1004F,PSY1005S,BUS1007S,BUS2024F,BUS2023S,BUS3003F,BUS3004S","PSY1004F, PSY1005S, BUS1007S, BUS2024F, BUS2023S, BUS3003F, BUS3004S"
+CB023BUS06,,3,Third Year,"MAM1012S,STA2020F,STA2030S,STA3030F,STA3036S,STA3022F","MAM1012S, STA2020F and STA2030S, STA3030F, STA3036S (STA3022F optional)"
+CB023BUS06,,3,Third Year,"BUS2023S,BUS3039",level. Students may not register for both BUS2023S and BUS3039 within the degree
+CB023BUS06,,3,Third Year,"BUS2023S,BUS3039",BUS2023S Organisational Behaviour (may not be taken with BUS3039)
+CB023BUS06,,3,Third Year,"PVL1008H,PVL1008S",PVL1008H Law of Persons and Family (formerly PVL1008S)
+CB020BUS01,,3,Third Year,"MAM2010F,MAM2011F",*MAM2010F and MAM2011F are compulsory courses. Students may chose 2 courses from
+CB020BUS09,,4,Fourth Year,"MAM2010F,MAM2011F",*MAM2010F and MAM2011F are compulsory courses. Students may choose 2 courses from
+CB011ECO02,,3,Third Year,"MAM2000W,MAM2000W",must obtain permission from the convener of MAM2000W. See the MAM2000W handbook entry
+CB011INF01,,4,Fourth Year,"CSC1015F,CSC1016S",open are requested to register for CB001INF06 and complete CSC1015F and CSC1016S in first year
+CB011INF01,,4,Fourth Year,"CSC1015F,CSC1016S",**Students who complete CSC1015F can complete CSC1016S in first year in substitution for
+CB011INF11,,1,First Year,"CSC1015F,CSC1016S",**Students who complete CSC1015F can complete CSC1016S in first year in substitution for
+CB011INF11,,1,First Year,"STA1000S,STA1000P",***Students who fail STA1000S are recommended to register for STA1000P (subject to approval).
+CB011INF11,,2,Second Year,"CSC1015F,CSC1016S",**Students who complete CSC1015F can complete CSC1016S in first year in substitution for
+CB011INF11,,2,Second Year,"STA1000S,STA1000P",***Students who fail STA1000S are recommended to register for STA1000P (subject to approval).
+CB011INF11,,4,Fourth Year,"CSC1015F,CSC1016S",* Students who complete CSC1015F can complete CSC1016S in first year in substitution for
+CB011BUS06,,4,Fourth Year,"BUS2033S,INF1003F,INF2008F,INF2009F,INF2010S,INF2011S,INF3003W,INF3014F","BUS2033S, INF1003F INF2008F, INF2009F, INF2010S and INF2011S plus INF3003W, INF3014F"
+CB011BUS06,,4,Fourth Year,"PSY1004F,PSY1005S,BUS1007S,BUS2024F,BUS2023S,BUS3003F,BUS3004S","PSY1004F, PSY1005S, BUS1007S, BUS2024F, BUS2023S, BUS3003F, BUS3004S"
+CB011BUS06,,4,Fourth Year,"MAM1012S,STA2020F,STA2030S,STA3030F,STA3036S,STA3022F","MAM1012S, STA2020F and STA2030S, STA3030F, STA3036S (STA3022F optional)"
+CB011BUS06,,4,Fourth Year,"BUS2023S,BUS3039",level. Students may not register for both BUS2023S and BUS3039 within the degree
+CB011BUS06,,4,Fourth Year,"BUS2023S,BUS3039",BUS2023S Organisational Behaviour (may not be taken with BUS3039)
+CB011BUS06,,4,Fourth Year,"PVL1008H,PVL1008S",PVL1008H Law of Persons and Family (formerly PVL1008S)
+CB011BUS06,,4,Fourth Year,"PVL1008S,PVL1008S",PVL1008S Law of Persons and Family (formerly PVL1008S)

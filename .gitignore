@@ -23,7 +23,7 @@ ENV/
 Thumbs.db
 
 # Data files (optional - uncomment if you don't want to commit CSV files)
-*.csv
+# *.csv
 # *.xlsx
 
 # Temporary files
