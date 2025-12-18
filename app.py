@@ -11,9 +11,12 @@ PAGE_TITLE = "Student Record Browser"
 
 
 def _parse_from_iter(lines_iter):
+
     students = []
     current_student = None
     current_year = None
+    header_map = None
+    header_row = None
 
     def is_header_line(line: str) -> bool:
         s = line.strip()
@@ -33,21 +36,6 @@ def _parse_from_iter(lines_iter):
         if set(s) <= set("-= "):
             return True
         return False
-
-    def looks_like_student_header(fields: list[str]) -> bool:
-        if len(fields) < 5:
-            return False
-        if not fields[0] or not fields[1]:
-            return False
-        if len(fields) >= 2 and "(CONTINUED" in fields[1]:
-            return False
-        # fields[2] should be all digits (student number)
-        if not fields[2].isdigit():
-            return False
-        # fields[0] should not be a year (e.g., 2021)
-        if fields[0].isdigit() and len(fields[0]) == 4:
-            return False
-        return True
 
     def parse_course_segment(seg: list[str]):
         if not seg or not seg[0]:
@@ -77,23 +65,79 @@ def _parse_from_iter(lines_iter):
             parts = [p.strip() for p in parts]
         else:
             parts = [p.strip() for p in row]
-        line = ",".join(row)  # Reconstruct for is_header_line check
+        line = ",".join(row)
+
+        # Detect header row for student data
+        if not header_map and any(h.lower() in ["campus id", "emplid", "name"] for h in parts):
+            header_row = parts
+            header_map = {h.strip().lower(): i for i, h in enumerate(parts)}
+            continue
+
+        # Skip non-data lines
         if is_header_line(line):
             continue
 
-        if looks_like_student_header(parts):
+        # Heuristic: detect campus IDs matching 6 letters + 3 digits in first few columns
+        is_new_student = False
+        campus_id_idx = None
+        campus_re = re.compile(r"^[A-Za-z]{6}\d{3}$")
+        # Look for campus id in columns 1..5 (common in CB015 and similar files)
+        for idx in range(1, min(len(parts), 6)):
+            p = parts[idx].upper()
+            if campus_re.match(p):
+                campus_id_idx = idx
+                break
+
+        # If we found a campus id in the row and there's a name-like first column, treat as new student
+        if campus_id_idx is not None and parts[0]:
+            is_new_student = True
+        # Fallback: quoted name in first column with other non-empty columns
+        elif len(parts) > 2 and parts[0].startswith('"') and (parts[1] or parts[2]):
+            is_new_student = True
+
+        if is_new_student:
             if current_student:
                 students.append(current_student)
-            name = f"{parts[0]}, {parts[1]}"
-            campus_id = parts[2]
-            emplid = parts[3]
-            prgm = parts[4]
-            plan = parts[6] if len(parts) > 6 else ""
-            level_start = parts[8] if len(parts) > 8 else ""
-            level_end = parts[9] if len(parts) > 9 else ""
-            finalist = parts[10] if len(parts) > 10 else ""
-            ann_code = parts[16] if len(parts) > 16 else ""
-            ann_comment = parts[17] if len(parts) > 17 else ""
+            # Try to extract fields robustly
+            name = parts[0].strip('"') if parts[0] else ""
+            campus_id = ""
+            emplid = ""
+            prgm = ""
+            plan = ""
+            level_start = ""
+            level_end = ""
+            finalist = ""
+            ann_code = ""
+            ann_comment = ""
+            # If we located campus_id index, use it
+            if campus_id_idx is not None:
+                campus_id = parts[campus_id_idx]
+                # emplid often follows campus_id
+                if campus_id_idx + 1 < len(parts) and parts[campus_id_idx + 1].isdigit():
+                    emplid = parts[campus_id_idx + 1]
+            else:
+                # Try to find campus_id and emplid in the next columns with looser rules
+                for p in parts[1:6]:
+                    if campus_re.match(p.upper()):
+                        campus_id = p
+                    elif p.isdigit() and not emplid:
+                        emplid = p
+
+            # Try to fill other fields if present (best-effort by common positions)
+            if len(parts) > 3 and not prgm:
+                prgm = parts[3]
+            if len(parts) > 4 and not plan:
+                plan = parts[4]
+            if len(parts) > 6:
+                level_start = parts[6]
+            if len(parts) > 7:
+                level_end = parts[7]
+            if len(parts) > 8:
+                finalist = parts[8]
+            if len(parts) > 16:
+                ann_code = parts[16]
+            if len(parts) > 17:
+                ann_comment = parts[17]
 
             current_student = {
                 "name": name,
@@ -213,6 +257,9 @@ def _parse_from_iter(lines_iter):
 
             if current_student is not None and summary:
                 current_student["summary"] = summary
+            if current_student is not None:
+                students.append(current_student)
+            current_student = None
             current_year = None
             continue
 
