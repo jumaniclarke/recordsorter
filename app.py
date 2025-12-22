@@ -134,7 +134,10 @@ def _parse_from_iter(lines_iter):
                 level_end = parts[7]
             if len(parts) > 8:
                 finalist = parts[8]
-            if len(parts) > 16:
+            # Prefer annotation code in column M (index 12), fall back to previous Q (index 16)
+            if len(parts) > 12 and parts[12].strip():
+                ann_code = parts[12]
+            elif len(parts) > 16:
                 ann_code = parts[16]
             if len(parts) > 17:
                 ann_comment = parts[17]
@@ -530,6 +533,36 @@ def main():
             st.session_state.original_csv_name = uploaded.name
             if "annotations" not in st.session_state:
                 st.session_state.annotations = {}
+            # Import existing annotation codes/comments from uploaded CSV
+            try:
+                csv_reader = csv.reader(io.StringIO(text))
+                campus_re = re.compile(r'^[A-Za-z]{6}\d{3}$')
+                for row in csv_reader:
+                    parts = [p.strip() for p in row]
+                    # find campus id in first 7 columns (common variants)
+                    campus = None
+                    for p in parts[:7]:
+                        if campus_re.match(p):
+                            campus = p
+                            break
+                    # fallback to col 2 if present
+                    if not campus and len(parts) > 2 and parts[2].strip():
+                        campus = parts[2].strip()
+                    if not campus:
+                        continue
+                    code = ""
+                    comment = ""
+                    if len(parts) > 12 and parts[12].strip():
+                        code = parts[12].strip()
+                    elif len(parts) > 16 and parts[16].strip():
+                        code = parts[16].strip()
+                    if len(parts) > 17 and parts[17].strip():
+                        comment = parts[17].strip()
+                    if code or comment:
+                        st.session_state.annotations[campus] = {"code": code, "comment": comment}
+            except Exception:
+                # don't fail upload on parsing of annotations; ignore errors
+                pass
             st.session_state.original_csv_text = text
             st.session_state.original_csv_name = uploaded.name
             if "annotations" not in st.session_state:
@@ -631,10 +664,11 @@ def main():
                         campus_id = parts[2].strip()
                         ann = annotations.get(campus_id)
                         if ann:
-                            while len(parts) <= 17:
-                                parts.append("")
-                            parts[16] = ann.get("code", "")
-                            parts[17] = ann.get("comment", "")
+                                # Ensure space for column M (index 12) and existing comment column (index 17)
+                                while len(parts) <= 17:
+                                    parts.append("")
+                                parts[12] = ann.get("code", "")  # column M
+                                parts[17] = ann.get("comment", "")
                     writer.writerow(parts)
                 return out.getvalue().encode("utf-8")
 
